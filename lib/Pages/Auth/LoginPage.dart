@@ -63,7 +63,7 @@ class LoginPage extends StatelessWidget {
                           ? CircularProgressIndicator()
                           : InkWell(
                               onTap: () {
-                                Get.offAll(HomePage());
+                              authController.signInWithGoogle();
                               },
                               child: Row(
                                 mainAxisAlignment:

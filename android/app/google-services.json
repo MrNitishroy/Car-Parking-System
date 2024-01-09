@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "463328853899",
+    "project_id": "saveandcar",
+    "storage_bucket": "saveandcar.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:463328853899:android:f1d8e4c42e49cbd370b98e",
+        "android_client_info": {
+          "package_name": "com.example.car_parking_system"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDBQGtqhz5RI_Taj07Sf4OnIQR0V0Xizt4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
