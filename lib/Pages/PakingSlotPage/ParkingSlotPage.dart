@@ -22,7 +22,7 @@ class ParkingSlotPage extends StatelessWidget {
       ),
       body: Padding(
         padding: EdgeInsets.all(10),
-        child: ListView(
+        child: Obx(() => parkingController.isLoading.value ? Center(child: CircularProgressIndicator(),) : ListView(
           children: [
             SizedBox(height: 50),
             const Row(
@@ -35,15 +35,14 @@ class ParkingSlotPage extends StatelessWidget {
             ),
             Row(
               children: [
-                Expanded(
+               Obx(() =>  Expanded(
                   child: ParkingSlot(
-                    parkingStatus:
-                        parkingController.parkingList[0].parkingStatus!,
+                    parkingStatus: parkingController.parkingList[0].parkingStatus!,
                     slotName: parkingController.parkingList[0].slotNumber!,
                     slotId: parkingController.parkingList[0].id!,
                     time: parkingController.parkingList[0].totalRemainingTime??"",
                   ),
-                ),
+                ),),
                 SizedBox(
                   width: 60,
                   height: 60,
@@ -177,7 +176,7 @@ class ParkingSlotPage extends StatelessWidget {
             ),
             SizedBox(height: 5),
           ],
-        ),
+        ),)
       ),
     );
   }

@@ -1,4 +1,5 @@
 import 'package:car_parking_system/Controller/AuthController.dart';
+import 'package:car_parking_system/Controller/ParkingController.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../CCTVPage/CctvPage.dart';
@@ -9,13 +10,26 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     AuthController authController = Get.put(AuthController());
+    ParkingController parkingController = Get.put(ParkingController());
     return Scaffold(
       appBar: AppBar(
         title: Text("ProfilePage"),
+        actions: [
+          IconButton(
+            onPressed: () {
+              parkingController.personalBooking();
+            },
+            icon: Icon(Icons.refresh),
+          ),
+          IconButton(
+            onPressed: () {},
+            icon: Icon(Icons.logout),
+          ),
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(15),
-        child: Column(
+        child: ListView(
           children: [
             Container(
               padding: EdgeInsets.all(15),
@@ -38,7 +52,7 @@ class ProfilePage extends StatelessWidget {
                       ),
                       SizedBox(height: 20),
                       Text(
-                        "${authController.auth.currentUser!.displayName ?? "Root User"}",
+                        "Root User",
                         style: Theme.of(context).textTheme.headlineMedium,
                       ),
                       Text(
@@ -58,142 +72,159 @@ class ProfilePage extends StatelessWidget {
               ],
             ),
             SizedBox(height: 20),
-            Column(
-              children: [
-                Container(
-                  padding: EdgeInsets.all(15),
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.primaryContainer,
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Row(
-                              children: [
-                                Image.asset(
-                                  "Assets/Photos/car.png",
-                                  width: 150,
-                                ),
-                                SizedBox(width: 20),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text("SLOT A-01",
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .headlineMedium),
-                                    SizedBox(height: 10),
-                                    Text("Nitish Kumar",
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .headlineMedium),
-                                  ],
-                                ),
-                              ],
-                            ),
-                            SizedBox(height: 20),
-                            Row(
-                              children: [
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      "Booking Time",
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .labelSmall,
-                                    ),
-                                    Text(
-                                      "2021-05-20  10:00 AM",
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .bodyMedium,
-                                    ),
-                                    SizedBox(height: 10),
-                                    Text(
-                                      "Paking Time",
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .labelSmall,
-                                    ),
-                                    Text(
-                                      "2021-05-20  10:00 AM",
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .bodyMedium,
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(width: 30),
-                                const Column(
-                                  children: [
-                                    SizedBox(height: 20),
-                                    Text("Booking Amount"),
-                                    Row(
+            Obx(
+              () => parkingController.isLoading.value
+                  ? LinearProgressIndicator()
+                  : Column(
+                      children: parkingController.yourBooking
+                          .map(
+                            (e) => Container(
+                              margin: EdgeInsets.only(bottom: 10),
+                              padding: EdgeInsets.all(15),
+                              decoration: BoxDecoration(
+                                color: Theme.of(context)
+                                    .colorScheme
+                                    .primaryContainer,
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: Row(
+                                children: [
+                                  Expanded(
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
                                       children: [
-                                        Icon(
-                                          Icons.currency_rupee,
-                                          size: 40,
+                                        Row(
+                                          children: [
+                                            Image.asset(
+                                              "Assets/Photos/car.png",
+                                              width: 150,
+                                            ),
+                                            SizedBox(width: 20),
+                                            Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text("SLOT NO: ${e.slotNumber}",
+                                                    style: Theme.of(context)
+                                                        .textTheme
+                                                        .headlineMedium),
+                                                SizedBox(height: 10),
+                                                Text("${e.name}",
+                                                    style: Theme.of(context)
+                                                        .textTheme
+                                                        .headlineMedium),
+                                              ],
+                                            ),
+                                          ],
                                         ),
-                                        Text(
-                                          "300",
-                                          style: TextStyle(
-                                              fontSize: 40,
-                                              fontWeight: FontWeight.bold),
+                                        SizedBox(height: 20),
+                                        Row(
+                                          children: [
+                                            Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  "Booking Time",
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .labelSmall,
+                                                ),
+                                                Text(
+                                                  "${e.parkingFromTime}",
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .bodyMedium,
+                                                ),
+                                                SizedBox(height: 10),
+                                                Text(
+                                                  "Paking Time",
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .labelSmall,
+                                                ),
+                                                Text(
+                                                  "${e.parkingToTime}",
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .bodyMedium,
+                                                ),
+                                              ],
+                                            ),
+                                            SizedBox(width: 30),
+                                            Column(
+                                              children: [
+                                                SizedBox(height: 20),
+                                                Text("Booking Amount"),
+                                                Row(
+                                                  children: [
+                                                    Icon(
+                                                      Icons.currency_rupee,
+                                                      size: 40,
+                                                    ),
+                                                    Text(
+                                                      "${e.totalAmount}",
+                                                      style: TextStyle(
+                                                          fontSize: 40,
+                                                          fontWeight:
+                                                              FontWeight.bold),
+                                                    ),
+                                                  ],
+                                                )
+                                              ],
+                                            )
+                                          ],
                                         ),
+                                        SizedBox(height: 30),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            e.parkingStatus == "parked"
+                                                ? ElevatedButton.icon(
+                                                    onPressed: () {
+                                                      parkingController
+                                                          .checkout(
+                                                              e.slotNumber!);
+                                                    },
+                                                    icon: Icon(Icons.done),
+                                                    label: Text("Check Out"),
+                                                  )
+                                                : ElevatedButton.icon(
+                                                    onPressed: () {
+                                                      parkingController.cancleBooking(e.slotNumber!);
+                                                    },
+                                                    icon: Icon(Icons.close),
+                                                    label:
+                                                        Text("Cancle Booking"),
+                                                  ),
+                                            e.parkingStatus == "booked"
+                                                ? ElevatedButton.icon(
+                                                    onPressed: () {
+                                                      parkingController.parked(
+                                                          e.slotNumber!);
+                                                    },
+                                                    icon: Icon(
+                                                        Icons.local_parking),
+                                                    label: Text(
+                                                        "Car Parked"),
+                                                  )
+                                                : const Text("Car parked"),
+                                          ],
+                                        )
                                       ],
-                                    )
-                                  ],
-                                )
-                              ],
-                            ),
-                            SizedBox(height: 30),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                ElevatedButton.icon(
-                                  onPressed: () {},
-                                  icon: Icon(Icons.done),
-                                  label: Text("Check Out"),
-                                ),
-                                ElevatedButton.icon(
-                                  onPressed: () {},
-                                  icon: Icon(Icons.local_parking),
-                                  label: Text("Car Parked"),
-                                ),
-                                InkWell(
-                                  onTap: () {
-                                    // Get.to(
-                                    //   CctvPage(),
-                                    // );
-                                  },
-                                  child: Container(
-                                    padding: EdgeInsets.all(5),
-                                    decoration: BoxDecoration(
-                                      color:
-                                          Theme.of(context).colorScheme.primary,
-                                      borderRadius: BorderRadius.circular(50),
-                                    ),
-                                    child: const Icon(
-                                      Icons.videocam_rounded,
                                     ),
                                   ),
-                                ),
-                              ],
-                            )
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                )
-              ],
-            )
+                                ],
+                              ),
+                            ),
+                          )
+                          .toList(),
+                    ),
+            ),
           ],
         ),
       ),

@@ -1,8 +1,15 @@
+import 'package:car_parking_system/Pages/PakingSlotPage/ParkingSlotPage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 
-Future<dynamic> BookedPopup(BuildContext context) {
+Future<dynamic> BookedPopup(
+    BuildContext context,
+    String slotId,
+    String amount,
+    String time,
+    String name,
+    String vehicalNumber) {
   return Get.defaultDialog(
     barrierDismissible: false,
     title: "SLOT BOOKED",
@@ -29,13 +36,13 @@ Future<dynamic> BookedPopup(BuildContext context) {
             )
           ],
         ),
-        const Row(
+         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(Icons.person),
             SizedBox(width: 5),
             Text(
-              "Name : Nitish Kumar",
+              "Name : $name",
               style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
@@ -43,13 +50,13 @@ Future<dynamic> BookedPopup(BuildContext context) {
             ),
           ],
         ),
-        const Row(
+         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(Icons.car_rental),
             SizedBox(width: 5),
             Text(
-              "Vehical No  : HJ1239 ",
+              "Vehical No  : $vehicalNumber ",
               style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
@@ -57,13 +64,13 @@ Future<dynamic> BookedPopup(BuildContext context) {
             ),
           ],
         ),
-        const Row(
+         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(Icons.watch_later_outlined),
             SizedBox(width: 5),
             Text(
-              "10:00 AM - 12:00 PM",
+              "Time : $time",
               style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
@@ -71,13 +78,13 @@ Future<dynamic> BookedPopup(BuildContext context) {
             ),
           ],
         ),
-        const Row(
+         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(Icons.solar_power_outlined),
             SizedBox(width: 5),
             Text(
-              "Parking Slot : A-01",
+              "Parking Slot : $slotId",
               style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
@@ -94,7 +101,7 @@ Future<dynamic> BookedPopup(BuildContext context) {
               color: Theme.of(context).colorScheme.primary,
             ),
             Text(
-              "300",
+              " $amount",
               style: TextStyle(
                 fontSize: 40,
                 fontWeight: FontWeight.w700,

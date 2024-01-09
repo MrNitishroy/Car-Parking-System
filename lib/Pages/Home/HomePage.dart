@@ -91,6 +91,7 @@ class HomePage extends StatelessWidget {
             SizedBox(height: 30),
             InkWell(
               onTap: () {
+                parkingController.personalBooking();
                 Get.to(ProfilePage());
               },
               child: Container(

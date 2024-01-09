@@ -12,6 +12,8 @@ class BookingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ParkingController parkingController = Get.put(ParkingController());
+    TextEditingController nameController = TextEditingController();
+    TextEditingController vehicalNumberController = TextEditingController();
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -71,6 +73,7 @@ class BookingPage extends StatelessWidget {
                 children: [
                   Expanded(
                     child: TextFormField(
+                      controller: nameController,
                       decoration: InputDecoration(
                         fillColor:
                             Theme.of(context).colorScheme.primaryContainer,
@@ -99,6 +102,7 @@ class BookingPage extends StatelessWidget {
                 children: [
                   Expanded(
                     child: TextFormField(
+                      controller: vehicalNumberController,
                       decoration: InputDecoration(
                         fillColor:
                             Theme.of(context).colorScheme.primaryContainer,
@@ -123,19 +127,21 @@ class BookingPage extends StatelessWidget {
                 ],
               ),
               SizedBox(height: 10),
-           Slider(
-                  mouseCursor: MouseCursor.defer,
-                  thumbColor: Theme.of(context).colorScheme.primary,
-                  activeColor:  Theme.of(context).colorScheme.primary,
-                  inactiveColor:  Theme.of(context).colorScheme.background,
-                  label: " 2 min",
-                  value: 12,
-                  onChanged: (v) {
-                    },
-                  divisions: 5,
-                  min: 10,
-                  max: 60,
-                ),
+              Obx(() => Slider(
+                mouseCursor: MouseCursor.defer,
+                thumbColor: Theme.of(context).colorScheme.primary,
+                activeColor: Theme.of(context).colorScheme.primary,
+                inactiveColor: Theme.of(context).colorScheme.background,
+                label: "${parkingController.time.value} m",
+                value: parkingController.time.value,
+                onChanged: (v) {
+                  parkingController.time.value = v;
+                  parkingController.amount.value = v * 5;
+                },
+                divisions: 5,
+                min: 10,
+                max: 60,
+              ),),
               const Padding(
                 padding: const EdgeInsets.only(left: 10, right: 20),
                 child: Row(
@@ -150,6 +156,7 @@ class BookingPage extends StatelessWidget {
                   ],
                 ),
               ),
+             
               SizedBox(height: 20),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -201,21 +208,27 @@ class BookingPage extends StatelessWidget {
                             size: 30,
                             color: Theme.of(context).colorScheme.primary,
                           ),
-                         Text(
-                              "300",
-                              style: TextStyle(
-                                fontSize: 40,
-                                fontWeight: FontWeight.w700,
-                                color:  Theme.of(context).colorScheme.primary,
-                              ),
+                        Obx(() =>   Text(
+                            "${parkingController.amount.value}",
+                            style: TextStyle(
+                              fontSize: 40,
+                              fontWeight: FontWeight.w700,
+                              color: Theme.of(context).colorScheme.primary,
                             ),
+                          ),)
                         ],
                       ),
                     ],
                   ),
                   InkWell(
                     onTap: () {
-                      BookedPopup(context);
+                      // BookedPopup(context);
+
+                      parkingController.bookSlot(
+                      nameController.text,
+                      vehicalNumberController.text,
+                      slotId,    
+                     context);
                     },
                     child: Container(
                       padding:

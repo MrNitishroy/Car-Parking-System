@@ -1,10 +1,15 @@
 import 'package:car_parking_system/Models/ParkingModel.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:uuid/uuid.dart';
 
+import '../Components/ConfirmPop.dart';
+
 class ParkingController extends GetxController {
   final db = FirebaseFirestore.instance;
+  final auth = FirebaseAuth.instance;
   String parkingSlot1Id = "A-0";
   String parkingSlot2Id = "A-1";
   String parkingSlot3Id = "A-2";
@@ -15,14 +20,26 @@ class ParkingController extends GetxController {
   String parkingSlot8Id = "A-7";
   String parkingSlot9Id = "A-8";
   RxList<ParkingModel> parkingList = RxList<ParkingModel>();
-
- void onInit() async {
+  RxList<ParkingModel> yourBooking = RxList<ParkingModel>();
+  RxDouble time = 10.0.obs;
+  RxDouble amount = 50.0.obs;
+  RxBool isLoading = false.obs;
+  Rx<ParkingModel> parkingSlot0 = ParkingModel().obs;
+  Rx<ParkingModel> parkingSlot1 = ParkingModel().obs;
+  Rx<ParkingModel> parkingSlot2 = ParkingModel().obs;
+  Rx<ParkingModel> parkingSlot3 = ParkingModel().obs;
+  Rx<ParkingModel> parkingSlot4 = ParkingModel().obs;
+  Rx<ParkingModel> parkingSlot5 = ParkingModel().obs;
+  Rx<ParkingModel> parkingSlot6 = ParkingModel().obs;
+  Rx<ParkingModel> parkingSlot7 = ParkingModel().obs;
+  Rx<ParkingModel> parkingSlot8 = ParkingModel().obs;
+  void onInit() async {
 //  await   dataInit();
+    // getSlot1Info();
+    // await dataInit();
     await getParkingInfo();
     super.onInit();
-
   }
-  
 
   Future<void> dataInit() async {
     parkingList = RxList<ParkingModel>([
@@ -104,20 +121,148 @@ class ParkingController extends GetxController {
     }
     print("Parking Slots Initialized");
   }
-  
-  Future<void> getParkingInfo() async{
+
+  Future<void> getParkingInfo() async {
+    isLoading.value = true;
     parkingList.clear();
     await db.collection("parking").get().then((value) {
       for (var item in value.docs) {
         parkingList.add(ParkingModel.fromJson(item.data()));
       }
+      isLoading.value = false;
     }, onError: (e) {
       print(e);
+      isLoading.value = false;
     });
   }
 
-  
+  Future<void> bookSlot(
+    String name,
+    String vehicalNumber,
+    String slotId,
+    BuildContext context,
+  ) async {
+    try {
+      await db.collection("parking").doc(slotId).update(
+        {
+          "id": slotId,
+          "name": name,
+          "slotNumber": slotId,
+          "status": "booked",
+          "parkingStatus": "booked",
+          "vehicalNumber": vehicalNumber,
+          "totalAmount": amount.value.toString(),
+          "totalTime": time.value.toString(),
+        },
+      );
+      await db
+          .collection('users')
+          .doc(auth.currentUser!.uid)
+          .collection("parking")
+          .doc(slotId)
+          .set(
+        {
+          "name": name,
+          "status": "booked",
+          "parkingStatus": "booked",
+          "vehicalNumber": vehicalNumber,
+          "slotNumber": slotId,
+          "id": slotId,
+          "totalAmount": amount.value.toString(),
+          "totalTime": time.value.toString(),
+        },
+      );
+      await getParkingInfo();
+      BookedPopup(context, slotId, amount.value.toString(),
+          time.value.toString(), name, vehicalNumber);
+    } catch (e) {
+      print(e);
+    }
+  }
 
+  Future<void> personalBooking() async {
+    isLoading.value = true;
+    yourBooking.clear();
+    await db
+        .collection('users')
+        .doc(auth.currentUser!.uid)
+        .collection("parking")
+        .get()
+        .then((value) {
+      for (var item in value.docs) {
+        yourBooking.add(ParkingModel.fromJson(item.data()));
+      }
+    });
+    isLoading.value = false;
+  }
 
+  Future<void> checkout(String slotId) async {
+    isLoading.value = true;
+    await db.collection("parking").doc(slotId).update(
+      {
+        "id": slotId,
+        "name": "",
+        "slotNumber": slotId,
+        "parkingStatus": "available",
+        "vehicalNumber": "",
+        "totalAmount": "",
+        "totalTime": "",
+      },
+    );
+    await db
+        .collection("users")
+        .doc(auth.currentUser!.uid)
+        .collection("parking")
+        .doc(slotId)
+        .delete();
+    await personalBooking();
+    await getParkingInfo();
+    isLoading.value = false;
+  }
 
+  Future<void> parked(String slotId) async {
+    isLoading.value = true;
+    await db.collection("parking").doc(slotId).update(
+      {
+        "parkingStatus": "parked",
+      },
+    );
+    await db
+        .collection("users")
+        .doc(auth.currentUser!.uid)
+        .collection("parking")
+        .doc(slotId)
+        .update(
+      {
+        "parkingStatus": "parked",
+      },
+    );
+    await personalBooking();
+    await getParkingInfo();
+    isLoading.value = false;
+  }
+
+  Future<void> cancleBooking(String slotId) async {
+    isLoading.value = true;
+    await db.collection("parking").doc(slotId).update(
+      {
+        "id": slotId,
+        "name": "",
+        "slotNumber": slotId,
+        "parkingStatus": "available",
+        "vehicalNumber": "",
+        "totalAmount": "",
+        "totalTime": "",
+      },
+    );
+    await db
+        .collection("users")
+        .doc(auth.currentUser!.uid)
+        .collection("parking")
+        .doc(slotId)
+        .delete();
+    await personalBooking();
+    await getParkingInfo();
+    isLoading.value = false;
+  }
 }
