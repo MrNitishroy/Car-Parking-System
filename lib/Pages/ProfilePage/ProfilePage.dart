@@ -1,6 +1,6 @@
+import 'package:car_parking_system/Controller/AuthController.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../CCTVPage/CctvPage.dart';
 
 class ProfilePage extends StatelessWidget {
@@ -8,6 +8,7 @@ class ProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    AuthController authController = Get.put(AuthController());
     return Scaffold(
       appBar: AppBar(
         title: Text("ProfilePage"),
@@ -37,11 +38,11 @@ class ProfilePage extends StatelessWidget {
                       ),
                       SizedBox(height: 20),
                       Text(
-                        "Nitish Kumar",
+                        "${authController.auth.currentUser!.displayName ?? "Root User"}",
                         style: Theme.of(context).textTheme.headlineMedium,
                       ),
                       Text(
-                        "Nitishr833@gmail.com",
+                        "${authController.auth.currentUser!.email}",
                         style: Theme.of(context).textTheme.bodyMedium,
                       ),
                     ],

@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
@@ -6,22 +7,41 @@ import '../Pages/Home/HomePage.dart';
 
 class AuthController extends GetxController {
   RxBool isLoading = false.obs;
+  RxBool isLogin = false.obs;
   final auth = FirebaseAuth.instance;
-
+  TextEditingController loginEmail = TextEditingController();
+  TextEditingController loginPwd = TextEditingController();
+  TextEditingController signupEmail = TextEditingController();
+  TextEditingController signupName = TextEditingController();
+  TextEditingController signupPwd = TextEditingController();
   final GoogleSignIn _googleSignIn = GoogleSignIn();
 
-  Future<void> signInWithGoogle() async {
+  Future<void> loginWithEmailPassword() async {
     isLoading.value = true;
-    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
-    final GoogleSignInAuthentication? googleAuth =
-        await googleUser?.authentication;
-    final credential = GoogleAuthProvider.credential(
-      accessToken: googleAuth?.accessToken,
-      idToken: googleAuth?.idToken,
+    await auth.signInWithEmailAndPassword(
+        email: loginEmail.text, password: loginPwd.text);
+    Get.offAll(
+      HomePage(),
+      transition: Transition.fadeIn,
     );
-    await FirebaseAuth.instance.signInWithCredential(credential);
-    Get.offAll(HomePage(), transition: Transition.fadeIn);
-    print(auth.currentUser?.displayName);
     isLoading.value = false;
+  }
+
+  Future<void> signUpWithEmailPassword() async {
+    isLoading.value = true;
+    await auth.createUserWithEmailAndPassword(
+      email: signupEmail.text,
+      password: signupPwd.text,
+    );
+    Get.offAll(
+      HomePage(),
+      transition: Transition.fadeIn,
+    );
+    isLoading.value = false;
+  }
+
+  Future<void> signOutGoogle() async {
+    await _googleSignIn.signOut();
+    print("User Signed Out");
   }
 }
