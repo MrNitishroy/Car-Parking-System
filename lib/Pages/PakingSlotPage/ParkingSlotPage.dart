@@ -1,3 +1,4 @@
+import 'package:car_parking_system/ConstData.dart';
 import 'package:car_parking_system/Pages/PakingSlotPage/Widgets/ParkingSlot.dart';
 import 'package:flutter/material.dart';
 
@@ -166,7 +167,7 @@ class ParkingSlotPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  "Made By ❤️ : Nitish roy",
+                  "Made By ❤️ : $LeaderName",
                   style: Theme.of(context).textTheme.labelSmall,
                 ),
               ],

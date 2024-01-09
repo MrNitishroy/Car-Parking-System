@@ -6,7 +6,9 @@ import 'package:get/get.dart';
 
 import 'Config/myTheme.dart';
 
-void main() {
+void main() async{
+WidgetsFlutterBinding.ensureInitialized();
+
   runApp(const MyApp());
 }
 
