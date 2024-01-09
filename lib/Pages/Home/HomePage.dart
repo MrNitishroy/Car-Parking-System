@@ -1,3 +1,4 @@
+import 'package:car_parking_system/Controller/ParkingController.dart';
 import 'package:car_parking_system/Controller/ThemeController.dart';
 import 'package:car_parking_system/Pages/Notification/NotificationPage.dart';
 import 'package:car_parking_system/Pages/PakingSlotPage/ParkingSlotPage.dart';
@@ -12,6 +13,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ThemeController themeController = Get.put(ThemeController());
+    ParkingController parkingController = Get.put(ParkingController());
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,

@@ -4,19 +4,17 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class ParkingSlot extends StatelessWidget {
-  final bool isParked;
-  final bool isBooked;
+  final String parkingStatus;
   final String slotName;
   final String slotId;
   final String time;
 
   const ParkingSlot({
     super.key,
-    this.isParked = false,
-    this.isBooked = false,
     this.slotName = "A-1",
     this.slotId = "0.0",
-    required this.time,
+    this.time = "0",
+    this.parkingStatus = "available",
   });
 
   @override
@@ -62,7 +60,7 @@ class ParkingSlot extends StatelessWidget {
               ],
             ),
             SizedBox(height: 10),
-            isBooked && isParked
+            parkingStatus == "parked"
                 ? Expanded(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -74,7 +72,7 @@ class ParkingSlot extends StatelessWidget {
                       ],
                     ),
                   )
-                : isBooked
+                : parkingStatus == "booked"
                     ? Expanded(
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,

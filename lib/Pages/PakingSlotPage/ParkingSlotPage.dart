@@ -1,12 +1,15 @@
 import 'package:car_parking_system/ConstData.dart';
+import 'package:car_parking_system/Controller/ParkingController.dart';
 import 'package:car_parking_system/Pages/PakingSlotPage/Widgets/ParkingSlot.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class ParkingSlotPage extends StatelessWidget {
   const ParkingSlotPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    ParkingController parkingController = Get.put(ParkingController());
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -32,13 +35,13 @@ class ParkingSlotPage extends StatelessWidget {
             ),
             Row(
               children: [
-                const Expanded(
+                Expanded(
                   child: ParkingSlot(
-                    isBooked: true,
-                    isParked: true,
-                    slotName: "A-1",
-                    slotId: "1",
-                    time: "12:00",
+                    parkingStatus:
+                        parkingController.parkingList[0].parkingStatus!,
+                    slotName: parkingController.parkingList[0].slotNumber!,
+                    slotId: parkingController.parkingList[0].id!,
+                    time: parkingController.parkingList[0].totalRemainingTime??"",
                   ),
                 ),
                 SizedBox(
@@ -51,11 +54,11 @@ class ParkingSlotPage extends StatelessWidget {
                 ),
                 Expanded(
                   child: ParkingSlot(
-                    isBooked: true,
-                    isParked: true,
-                    slotName: "A-2",
-                    slotId: "1",
-                    time: "0:0",
+                    parkingStatus:
+                        parkingController.parkingList[1].parkingStatus!,
+                    slotName: parkingController.parkingList[1].slotNumber!,
+                    slotId: parkingController.parkingList[1].id!,
+                    time: parkingController.parkingList[1].totalRemainingTime??"",
                   ),
                 ),
               ],
@@ -65,11 +68,11 @@ class ParkingSlotPage extends StatelessWidget {
               children: [
                 Expanded(
                   child: ParkingSlot(
-                    isBooked: false,
-                    isParked: false,
-                    slotName: "A-1",
-                    slotId: "1",
-                    time: "0:0",
+                    parkingStatus:
+                        parkingController.parkingList[2].parkingStatus!,
+                    slotName: parkingController.parkingList[2].slotNumber!,
+                    slotId: parkingController.parkingList[2].id!,
+                    time: parkingController.parkingList[2].totalRemainingTime??"",
                   ),
                 ),
                 SizedBox(
@@ -82,11 +85,11 @@ class ParkingSlotPage extends StatelessWidget {
                 ),
                 Expanded(
                   child: ParkingSlot(
-                    isBooked: false,
-                    isParked: false,
-                    slotName: "A-2",
-                    slotId: "1",
-                    time: "0:0",
+                    parkingStatus:
+                        parkingController.parkingList[3].parkingStatus!,
+                    slotName: parkingController.parkingList[3].slotNumber!,
+                    slotId: parkingController.parkingList[3].id!,
+                    time: parkingController.parkingList[3].totalRemainingTime??"",
                   ),
                 ),
               ],
@@ -96,11 +99,11 @@ class ParkingSlotPage extends StatelessWidget {
               children: [
                 Expanded(
                   child: ParkingSlot(
-                    isBooked: false,
-                    isParked: false,
-                    slotName: "A-1",
-                    slotId: "1",
-                    time: "0:0",
+                    parkingStatus:
+                        parkingController.parkingList[4].parkingStatus!,
+                    slotName: parkingController.parkingList[4].slotNumber!,
+                    slotId: parkingController.parkingList[4].id!,
+                    time: parkingController.parkingList[4].totalRemainingTime??"",
                   ),
                 ),
                 SizedBox(
@@ -113,11 +116,11 @@ class ParkingSlotPage extends StatelessWidget {
                 ),
                 Expanded(
                   child: ParkingSlot(
-                    isBooked: false,
-                    isParked: false,
-                    slotName: "A-2",
-                    slotId: "1",
-                    time: "0:0",
+                    parkingStatus:
+                        parkingController.parkingList[5].parkingStatus!,
+                    slotName: parkingController.parkingList[5].slotNumber!,
+                    slotId: parkingController.parkingList[5].id!,
+                    time: parkingController.parkingList[5].totalRemainingTime??"",
                   ),
                 ),
               ],
@@ -127,11 +130,11 @@ class ParkingSlotPage extends StatelessWidget {
               children: [
                 Expanded(
                   child: ParkingSlot(
-                    isBooked: false,
-                    isParked: false,
-                    slotName: "A-1",
-                    slotId: "1",
-                    time: "0:0",
+                    parkingStatus:
+                        parkingController.parkingList[6].parkingStatus!,
+                    slotName: parkingController.parkingList[6].slotNumber!,
+                    slotId: parkingController.parkingList[6].id!,
+                    time: parkingController.parkingList[6].totalRemainingTime??"",
                   ),
                 ),
                 SizedBox(
@@ -144,11 +147,11 @@ class ParkingSlotPage extends StatelessWidget {
                 ),
                 Expanded(
                   child: ParkingSlot(
-                    isBooked: false,
-                    isParked: false,
-                    slotName: "A-2",
-                    slotId: "1",
-                    time: "0:0",
+                    parkingStatus:
+                        parkingController.parkingList[7].parkingStatus!,
+                    slotName: parkingController.parkingList[7].slotNumber!,
+                    slotId: parkingController.parkingList[7].id!,
+                    time: parkingController.parkingList[7].totalRemainingTime??"",
                   ),
                 ),
               ],

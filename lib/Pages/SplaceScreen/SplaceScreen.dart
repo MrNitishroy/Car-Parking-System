@@ -1,3 +1,4 @@
+import 'package:car_parking_system/Controller/ParkingController.dart';
 import 'package:car_parking_system/Controller/SplaceController.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
