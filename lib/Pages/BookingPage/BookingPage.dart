@@ -203,11 +203,7 @@ class BookingPage extends StatelessWidget {
                       ),
                       Row(
                         children: [
-                          Icon(
-                            Icons.currency_rupee,
-                            size: 30,
-                            color: Theme.of(context).colorScheme.primary,
-                          ),
+                         Image.asset("Assets/Icons/currency.png",width: 40,),
                         Obx(() =>   Text(
                             "${parkingController.amount.value}",
                             style: TextStyle(

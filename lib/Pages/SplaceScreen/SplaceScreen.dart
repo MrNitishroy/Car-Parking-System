@@ -49,7 +49,7 @@ class Splace_Screen extends StatelessWidget {
                   children: [
                     Flexible(
                       child: Text(
-                        "This is a Car parking app for Smart car parkign station, Here you can find Avalible slot and book your parking slot from any where with you phone",
+                        "This is a Car parking app for Smart car parking station. Here you can find Avalible slot and book your parking slot in a secured manner, anywhere, anytime.",
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontSize: 15,
@@ -63,16 +63,16 @@ class Splace_Screen extends StatelessWidget {
               ],
             ),
           ),
-          // Expanded(
-          //     child: Row(
-          //   mainAxisAlignment: MainAxisAlignment.center,
-          //   children: [
-          //     Image.asset(
-          //       collegeLogo,
-          //       width: 200,
-          //     )
-          //   ],
-          // )),
+          Expanded(
+              child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset(
+                collegeLogo,
+                width: 200,
+              )
+            ],
+          )),
         ]),
       ),
     );

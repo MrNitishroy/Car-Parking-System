@@ -1,5 +1,7 @@
+import 'package:car_parking_system/Controller/AuthController.dart';
 import 'package:car_parking_system/Controller/ParkingController.dart';
 import 'package:car_parking_system/Controller/ThemeController.dart';
+import 'package:car_parking_system/Pages/CCTVPage/CctvPage.dart';
 import 'package:car_parking_system/Pages/Notification/NotificationPage.dart';
 import 'package:car_parking_system/Pages/PakingSlotPage/ParkingSlotPage.dart';
 import 'package:car_parking_system/Pages/ProfilePage/ProfilePage.dart';
@@ -14,6 +16,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     ThemeController themeController = Get.put(ThemeController());
     ParkingController parkingController = Get.put(ParkingController());
+    AuthController authController = Get.put(AuthController());
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -90,9 +93,12 @@ class HomePage extends StatelessWidget {
             ),
             SizedBox(height: 30),
             InkWell(
-              onTap: () {
-                parkingController.personalBooking();
-                Get.to(ProfilePage());
+              onTap: () async{
+              await  parkingController.personalBooking();
+                // Get.to(ProfilePage());
+               await parkingController.checkingCarisParkedOrNot();
+                parkingController.isYourCarParked.value ? Get.to(CctvPage()) : Get.snackbar("Unparked Vehicle ","Please park your vehicle first");
+
               },
               child: Container(
                 padding: EdgeInsets.all(20),
@@ -109,6 +115,33 @@ class HomePage extends StatelessWidget {
                     SizedBox(width: 30),
                     Text(
                       "View CCTV Footage",
+                      style: Theme.of(context).textTheme.headlineMedium,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            SizedBox(height: 30),
+            InkWell(
+              onTap: () {
+                parkingController.personalBooking();
+                Get.to(ProfilePage());
+              },
+              child: Container(
+                padding: EdgeInsets.all(20),
+                decoration: BoxDecoration(
+                  color: Theme.of(context).colorScheme.primaryContainer,
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.person,
+                      size: 40,
+                    ),
+                    SizedBox(width: 30),
+                    Text(
+                      "Profile Page",
                       style: Theme.of(context).textTheme.headlineMedium,
                     ),
                   ],
@@ -143,7 +176,9 @@ class HomePage extends StatelessWidget {
             ),
             Spacer(),
             ElevatedButton.icon(
-              onPressed: () {},
+              onPressed: () {
+authController.signOut();
+              },
               icon: Icon(Icons.logout),
               label: Text("Logout"),
             ),

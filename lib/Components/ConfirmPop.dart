@@ -95,11 +95,7 @@ Future<dynamic> BookedPopup(
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(
-              Icons.currency_rupee,
-              size: 40,
-              color: Theme.of(context).colorScheme.primary,
-            ),
+          Image.asset("Assets/Icons/currency.png",width: 20,),
             Text(
               " $amount",
               style: TextStyle(

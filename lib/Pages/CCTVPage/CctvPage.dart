@@ -15,12 +15,7 @@ class CctvPage extends StatelessWidget {
       ),
       body: Column(
         children: [
-         cctvController.controller.value.isInitialized
-              ? AspectRatio(
-                  aspectRatio: cctvController.controller.value.aspectRatio,
-                  child: VideoPlayer(cctvController.controller),
-                )
-              : Container(),
+        Text("CCTV"),
         ],
       ),
     );

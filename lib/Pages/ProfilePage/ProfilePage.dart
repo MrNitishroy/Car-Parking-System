@@ -22,7 +22,9 @@ class ProfilePage extends StatelessWidget {
             icon: Icon(Icons.refresh),
           ),
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              authController.signOut();
+            },
             icon: Icon(Icons.logout),
           ),
         ],
@@ -161,10 +163,7 @@ class ProfilePage extends StatelessWidget {
                                                 Text("Booking Amount"),
                                                 Row(
                                                   children: [
-                                                    Icon(
-                                                      Icons.currency_rupee,
-                                                      size: 40,
-                                                    ),
+                                                   Image.asset("Assets/Icons/currency.png",width: 40,),
                                                     Text(
                                                       "${e.totalAmount}",
                                                       style: TextStyle(
@@ -199,7 +198,7 @@ class ProfilePage extends StatelessWidget {
                                                     },
                                                     icon: Icon(Icons.close),
                                                     label:
-                                                        Text("Cancle Booking"),
+                                                        Text("Cancel Booking"),
                                                   ),
                                             e.parkingStatus == "booked"
                                                 ? ElevatedButton.icon(

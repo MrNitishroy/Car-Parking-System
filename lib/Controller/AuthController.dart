@@ -1,3 +1,4 @@
+import 'package:car_parking_system/Pages/Auth/LoginPage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -40,8 +41,8 @@ class AuthController extends GetxController {
     isLoading.value = false;
   }
 
-  Future<void> signOutGoogle() async {
-    await _googleSignIn.signOut();
-    print("User Signed Out");
+  Future<void> signOut() async {
+    auth.signOut();
+    Get.off(LoginPage());
   }
 }

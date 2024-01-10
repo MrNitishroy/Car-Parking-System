@@ -1,4 +1,4 @@
-const collegeLogo = 'assets/images/tit.png';
+const collegeLogo = 'Assets/Photos/unimy.png';
 const profilePath = "assets/images/profile.jpg";
 const LeaderName = "Zain";
 const GoogleMapAPiKey = "AIzaSyAl5TtsfNcQL0iLuG_STqqYcW5zgEV19no";

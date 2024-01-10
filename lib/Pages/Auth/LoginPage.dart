@@ -32,7 +32,7 @@ class LoginPage extends StatelessWidget {
                   ),
                   SizedBox(height: 20),
                    Text(
-                    "UNIWALT",
+                    "SAVE AND SECURE",
                   style:Theme.of(context).textTheme.headlineMedium
                   )
                 ],

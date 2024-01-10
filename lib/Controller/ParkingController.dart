@@ -21,6 +21,7 @@ class ParkingController extends GetxController {
   String parkingSlot9Id = "A-8";
   RxList<ParkingModel> parkingList = RxList<ParkingModel>();
   RxList<ParkingModel> yourBooking = RxList<ParkingModel>();
+  RxBool isYourCarParked = false.obs;
   RxDouble time = 10.0.obs;
   RxDouble amount = 50.0.obs;
   RxBool isLoading = false.obs;
@@ -264,5 +265,21 @@ class ParkingController extends GetxController {
     await personalBooking();
     await getParkingInfo();
     isLoading.value = false;
+  }
+
+  Future<void> checkingCarisParkedOrNot() async{
+    for(var car in yourBooking)
+    {
+      if(car.parkingStatus=="parked")
+      {
+        isYourCarParked.value = true;
+        return;
+
+      }
+      else{
+        isYourCarParked.value = false;
+        return;
+      }
+    }
   }
 }
