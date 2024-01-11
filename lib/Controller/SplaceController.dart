@@ -10,7 +10,7 @@ class SplaceController extends GetxController {
   }
   AuthController  authController = Get.put(AuthController());
   Future<void> splaceHandle() async {
-    await Future.delayed(Duration(seconds: 3));
+    await Future.delayed(Duration(seconds: 10));
     if(authController.auth.currentUser != null){
       Get.offAll(HomePage());
     }else{

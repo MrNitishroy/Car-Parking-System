@@ -22,8 +22,8 @@ class ParkingController extends GetxController {
   RxList<ParkingModel> parkingList = RxList<ParkingModel>();
   RxList<ParkingModel> yourBooking = RxList<ParkingModel>();
   RxBool isYourCarParked = false.obs;
-  RxDouble time = 10.0.obs;
-  RxDouble amount = 50.0.obs;
+  RxDouble time = 30.0.obs;
+  RxDouble amount = 1.5.obs;
   RxBool isLoading = false.obs;
   Rx<ParkingModel> parkingSlot0 = ParkingModel().obs;
   Rx<ParkingModel> parkingSlot1 = ParkingModel().obs;

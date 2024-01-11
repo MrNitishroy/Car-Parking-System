@@ -136,23 +136,24 @@ class BookingPage extends StatelessWidget {
                 value: parkingController.time.value,
                 onChanged: (v) {
                   parkingController.time.value = v;
-                  parkingController.amount.value = v * 5;
+                  parkingController.amount.value = v * .05;
                 },
-                divisions: 5,
-                min: 10,
-                max: 60,
+                divisions: 6,
+                min: 30,
+                max: 210,
               ),),
               const Padding(
                 padding: const EdgeInsets.only(left: 10, right: 20),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text("10"),
-                    Text("20"),
                     Text("30"),
-                    Text("40"),
-                    Text("50"),
                     Text("60"),
+                    Text("90"),
+                    Text("120"),
+                    Text("150"),
+                    Text("180"),
+                    Text("210"),
                   ],
                 ),
               ),
@@ -205,7 +206,7 @@ class BookingPage extends StatelessWidget {
                         children: [
                          Image.asset("Assets/Icons/currency.png",width: 40,),
                         Obx(() =>   Text(
-                            "${parkingController.amount.value}",
+                            "${parkingController.amount.value.toStringAsFixed(2)}",
                             style: TextStyle(
                               fontSize: 40,
                               fontWeight: FontWeight.w700,
