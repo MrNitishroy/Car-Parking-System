@@ -40,6 +40,7 @@ dependencies:
   get: ^4.6.6
   lottie: ^2.7.0
   video_player: ^2.8.2
+  chewie: ^1.7.4
   flutter_svg: ^2.0.9
   firebase_core: ^2.24.2
   flutterfire_cli: ^0.2.7
@@ -75,7 +76,7 @@ flutter:
     - Assets/animation/
     - Assets/Photos/
     - Assets/Icons/
-    - Assets/video/video.mp4
+    - Assets/video/
     # - images/a_dot_burr.jpeg
     # - images/a_dot_ham.jpeg
 
