@@ -1,3 +1,4 @@
+import 'package:car_parking_system/Controller/NotificationController.dart';
 import 'package:car_parking_system/Models/ParkingModel.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -34,6 +35,7 @@ class ParkingController extends GetxController {
   Rx<ParkingModel> parkingSlot6 = ParkingModel().obs;
   Rx<ParkingModel> parkingSlot7 = ParkingModel().obs;
   Rx<ParkingModel> parkingSlot8 = ParkingModel().obs;
+  NotificationControler notification = Get.put(NotificationControler());
   void onInit() async {
 //  await   dataInit();
     // getSlot1Info();
@@ -174,6 +176,7 @@ class ParkingController extends GetxController {
         },
       );
       await getParkingInfo();
+      await notification.addNotification("Slot no $slotId booked" , "Booked","You have booked a new slot ");
       BookedPopup(context, slotId, amount.value.toString(),
           time.value.toString(), name, vehicalNumber);
     } catch (e) {
@@ -218,6 +221,8 @@ class ParkingController extends GetxController {
         .delete();
     await personalBooking();
     await getParkingInfo();
+      await notification.addNotification("Slot no $slotId checked out" , "checkout","You have checked out from your parking ");
+
     isLoading.value = false;
   }
 
@@ -240,6 +245,8 @@ class ParkingController extends GetxController {
     );
     await personalBooking();
     await getParkingInfo();
+      await notification.addNotification("Slot no $slotId parked" , "parked","You have parked at your spot ");
+
     isLoading.value = false;
   }
 
@@ -264,6 +271,8 @@ class ParkingController extends GetxController {
         .delete();
     await personalBooking();
     await getParkingInfo();
+      await notification.addNotification("Slot no $slotId cancelled booking" , "cancel","You have cancelled your booking ");
+    
     isLoading.value = false;
   }
 
