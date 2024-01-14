@@ -17,7 +17,7 @@ class ParkingController extends GetxController {
   String parkingSlot4Id = "A-4";
   String parkingSlot5Id = "A-5";
   String parkingSlot6Id = "A-6";
-  String parkingSlot7Id = "A-7"; 
+  String parkingSlot7Id = "A-7";
   RxList<ParkingModel> parkingList = RxList<ParkingModel>();
   RxList<ParkingModel> yourBooking = RxList<ParkingModel>();
   RxBool isYourCarParked = false.obs;
@@ -34,7 +34,7 @@ class ParkingController extends GetxController {
   Rx<ParkingModel> parkingSlot7 = ParkingModel().obs;
   NotificationControler notification = Get.put(NotificationControler());
   void onInit() async {
-    await dataInit();
+    // await dataInit();
     // getSlot1Info();
     // await dataInit();
     await getParkingInfo();
