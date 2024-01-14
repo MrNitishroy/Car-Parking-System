@@ -127,21 +127,23 @@ class BookingPage extends StatelessWidget {
                 ],
               ),
               SizedBox(height: 10),
-              Obx(() => Slider(
-                mouseCursor: MouseCursor.defer,
-                thumbColor: Theme.of(context).colorScheme.primary,
-                activeColor: Theme.of(context).colorScheme.primary,
-                inactiveColor: Theme.of(context).colorScheme.background,
-                label: "${parkingController.time.value} m",
-                value: parkingController.time.value,
-                onChanged: (v) {
-                  parkingController.time.value = v;
-                  parkingController.amount.value = v * .05;
-                },
-                divisions: 6,
-                min: 30,
-                max: 210,
-              ),),
+              Obx(
+                () => Slider(
+                  mouseCursor: MouseCursor.defer,
+                  thumbColor: Theme.of(context).colorScheme.primary,
+                  activeColor: Theme.of(context).colorScheme.primary,
+                  inactiveColor: Theme.of(context).colorScheme.background,
+                  label: "${parkingController.time.value} m",
+                  value: parkingController.time.value,
+                  onChanged: (v) {
+                    parkingController.time.value = v;
+                    parkingController.amount.value = v * .05;
+                  },
+                  divisions: 6,
+                  min: 30,
+                  max: 210,
+                ),
+              ),
               const Padding(
                 padding: const EdgeInsets.only(left: 10, right: 20),
                 child: Row(
@@ -157,7 +159,6 @@ class BookingPage extends StatelessWidget {
                   ],
                 ),
               ),
-             
               SizedBox(height: 20),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -204,15 +205,20 @@ class BookingPage extends StatelessWidget {
                       ),
                       Row(
                         children: [
-                         Image.asset("Assets/Icons/currency.png",width: 40,),
-                        Obx(() =>   Text(
-                            "${parkingController.amount.value.toStringAsFixed(2)}",
-                            style: TextStyle(
-                              fontSize: 40,
-                              fontWeight: FontWeight.w700,
-                              color: Theme.of(context).colorScheme.primary,
+                          Image.asset(
+                            "Assets/Icons/currency.png",
+                            width: 40,
+                          ),
+                          Obx(
+                            () => Text(
+                              "${parkingController.amount.value.toStringAsFixed(2)}",
+                              style: TextStyle(
+                                fontSize: 40,
+                                fontWeight: FontWeight.w700,
+                                color: Theme.of(context).colorScheme.primary,
+                              ),
                             ),
-                          ),)
+                          )
                         ],
                       ),
                     ],
@@ -221,15 +227,12 @@ class BookingPage extends StatelessWidget {
                     onTap: () {
                       // BookedPopup(context);
 
-                      parkingController.bookSlot(
-                      nameController.text,
-                      vehicalNumberController.text,
-                      slotId,    
-                     context);
+                      parkingController.bookSlot(nameController.text,
+                          vehicalNumberController.text, slotId, context);
                     },
                     child: Container(
                       padding:
-                          EdgeInsets.symmetric(horizontal: 60, vertical: 20),
+                          EdgeInsets.symmetric(horizontal: 40, vertical: 15),
                       decoration: BoxDecoration(
                         color: Theme.of(context).colorScheme.primary,
                         borderRadius: BorderRadius.circular(10),

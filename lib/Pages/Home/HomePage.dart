@@ -3,7 +3,7 @@ import 'package:car_parking_system/Controller/ParkingController.dart';
 import 'package:car_parking_system/Controller/ThemeController.dart';
 import 'package:car_parking_system/Pages/CCTVPage/CctvPage.dart';
 import 'package:car_parking_system/Pages/Notification/NotificationPage.dart';
-import 'package:car_parking_system/Pages/PakingSlotPage/ParkingSlotPage.dart';
+import 'package:car_parking_system/Pages/PakingSlotPage/ViewParkingAvailablities.dart';
 import 'package:car_parking_system/Pages/ProfilePage/ProfilePage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -47,7 +47,7 @@ class HomePage extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.all(15),
-        child: Column(
+        child: ListView(
           children: [
             SizedBox(height: 20),
             SvgPicture.asset(
@@ -55,9 +55,14 @@ class HomePage extends StatelessWidget {
               color: Theme.of(context).colorScheme.onBackground,
             ),
             SizedBox(height: 20),
-            Text(
-              "SAVE AND SECURE",
-              style: Theme.of(context).textTheme.headlineLarge,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  "SAVE AND SECURE",
+                  style: Theme.of(context).textTheme.headlineLarge,
+                ),
+              ],
             ),
             SizedBox(height: 5),
             Text(
@@ -68,7 +73,7 @@ class HomePage extends StatelessWidget {
             SizedBox(height: 30),
             InkWell(
               onTap: () {
-                Get.to(ParkingSlotPage());
+                Get.to(ViewParkingAvailablities());
               },
               child: Container(
                 padding: EdgeInsets.all(20),
@@ -93,12 +98,14 @@ class HomePage extends StatelessWidget {
             ),
             SizedBox(height: 30),
             InkWell(
-              onTap: () async{
-              await  parkingController.personalBooking();
+              onTap: () async {
+                await parkingController.personalBooking();
                 // Get.to(ProfilePage());
-               await parkingController.checkingCarisParkedOrNot();
-                parkingController.isYourCarParked.value ? Get.to(CctvPage()) : Get.snackbar("Unparked Vehicle ","Please park your vehicle first");
-
+                await parkingController.checkingCarisParkedOrNot();
+                parkingController.isYourCarParked.value
+                    ? Get.to(CctvPage())
+                    : Get.snackbar(
+                        "Unparked Vehicle ", "Please park your vehicle first");
               },
               child: Container(
                 padding: EdgeInsets.all(20),
@@ -174,13 +181,20 @@ class HomePage extends StatelessWidget {
                 ),
               ),
             ),
-            Spacer(),
-            ElevatedButton.icon(
-              onPressed: () {
-authController.signOut();
-              },
-              icon: Icon(Icons.logout),
-              label: Text("Logout"),
+            SizedBox(height: 30),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  child: ElevatedButton.icon(
+                    onPressed: () {
+                      authController.signOut();
+                    },
+                    icon: Icon(Icons.logout),
+                    label: Text("Logout"),
+                  ),
+                ),
+              ],
             ),
           ],
         ),

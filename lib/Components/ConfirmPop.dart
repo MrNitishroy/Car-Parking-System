@@ -1,15 +1,11 @@
-import 'package:car_parking_system/Pages/PakingSlotPage/ParkingSlotPage.dart';
+import 'package:car_parking_system/Pages/Home/HomePage.dart';
+import 'package:car_parking_system/Pages/PakingSlotPage/ViewParkingAvailablities.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 
-Future<dynamic> BookedPopup(
-    BuildContext context,
-    String slotId,
-    String amount,
-    String time,
-    String name,
-    String vehicalNumber) {
+Future<dynamic> BookedPopup(BuildContext context, String slotId, String amount,
+    String time, String name, String vehicalNumber) {
   return Get.defaultDialog(
     barrierDismissible: false,
     title: "SLOT BOOKED",
@@ -36,7 +32,7 @@ Future<dynamic> BookedPopup(
             )
           ],
         ),
-         Row(
+        Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(Icons.person),
@@ -50,7 +46,7 @@ Future<dynamic> BookedPopup(
             ),
           ],
         ),
-         Row(
+        Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(Icons.car_rental),
@@ -64,7 +60,7 @@ Future<dynamic> BookedPopup(
             ),
           ],
         ),
-         Row(
+        Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(Icons.watch_later_outlined),
@@ -78,7 +74,7 @@ Future<dynamic> BookedPopup(
             ),
           ],
         ),
-         Row(
+        Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(Icons.solar_power_outlined),
@@ -95,7 +91,10 @@ Future<dynamic> BookedPopup(
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-          Image.asset("Assets/Icons/currency.png",width: 20,),
+            Image.asset(
+              "Assets/Icons/currency.png",
+              width: 20,
+            ),
             Text(
               " $amount",
               style: TextStyle(
@@ -109,7 +108,7 @@ Future<dynamic> BookedPopup(
         SizedBox(height: 20),
         ElevatedButton(
           onPressed: () {
-            Get.back();
+            Get.offAll(HomePage());
           },
           child: Text("Close"),
         )

@@ -34,14 +34,41 @@ class SignupForm extends StatelessWidget {
         ),
         const SizedBox(height: 20),
         // const SizedBox(height: 10),
-        TextFormField(
-          controller: authController.signupPwd,
-          onFieldSubmitted: (s) {},
-          decoration: const InputDecoration(
-              hintText: "Confirm Password",
-              prefixIcon: Icon(
-                Icons.lock_sharp,
+
+        Container(
+          color: Theme.of(context).colorScheme.background,
+          child: Row(
+            children: [
+              Expanded(
+                  child: Obx(
+                () => TextFormField(
+                  obscureText: authController.isPwdHide.value,
+                  controller: authController.signupPwd,
+                  onFieldSubmitted: (s) {
+                    print("Click on Done button $s ");
+                    // authController.loginWithEmailAndPassword();
+                  },
+                  decoration: const InputDecoration(
+                      hintText: "Confirm Password",
+                      prefixIcon: Icon(
+                        Icons.lock_sharp,
+                      )),
+                ),
               )),
+              Obx(
+                () => InkWell(
+                  onTap: () {
+                    authController.isPwdHide.value =
+                        !authController.isPwdHide.value;
+                  },
+                  child: authController.isPwdHide.value
+                      ? const Icon(Icons.visibility_off)
+                      : const Icon(Icons.visibility),
+                ),
+              ),
+              SizedBox(width: 10),
+            ],
+          ),
         ),
 
         const SizedBox(height: 30),

@@ -9,6 +9,7 @@ import '../Pages/Home/HomePage.dart';
 class AuthController extends GetxController {
   RxBool isLoading = false.obs;
   RxBool isLogin = false.obs;
+  RxBool isPwdHide = true.obs;
   final auth = FirebaseAuth.instance;
   TextEditingController loginEmail = TextEditingController();
   TextEditingController loginPwd = TextEditingController();

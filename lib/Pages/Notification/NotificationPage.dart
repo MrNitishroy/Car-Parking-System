@@ -22,9 +22,12 @@ class NotificationPage extends StatelessWidget {
                   children: notificationControler.notificationList
                       .map(
                         (e) => ListTile(
-                          trailing: IconButton(onPressed: (){
-                            notificationControler.deleteNotification(e.id!);
-                          }, icon: Icon(Icons.delete)),
+                          trailing: IconButton(
+                            onPressed: () {
+                              notificationControler.deleteNotification(e.id!);
+                            },
+                            icon: Icon(Icons.delete),
+                          ),
                           leading: Icon(Icons.notifications),
                           title: Text(
                             '${e.title}',
@@ -34,7 +37,6 @@ class NotificationPage extends StatelessWidget {
                             '${e.description}',
                             style: Theme.of(context).textTheme.labelSmall,
                           ),
-                          
                         ),
                       )
                       .toList()),
