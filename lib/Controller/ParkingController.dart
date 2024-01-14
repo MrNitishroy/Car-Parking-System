@@ -18,8 +18,6 @@ class ParkingController extends GetxController {
   String parkingSlot5Id = "A-4";
   String parkingSlot6Id = "A-5";
   String parkingSlot7Id = "A-6";
-  String parkingSlot8Id = "A-7";
-  String parkingSlot9Id = "A-8";
   RxList<ParkingModel> parkingList = RxList<ParkingModel>();
   RxList<ParkingModel> yourBooking = RxList<ParkingModel>();
   RxBool isYourCarParked = false.obs;
@@ -34,7 +32,6 @@ class ParkingController extends GetxController {
   Rx<ParkingModel> parkingSlot5 = ParkingModel().obs;
   Rx<ParkingModel> parkingSlot6 = ParkingModel().obs;
   Rx<ParkingModel> parkingSlot7 = ParkingModel().obs;
-  Rx<ParkingModel> parkingSlot8 = ParkingModel().obs;
   NotificationControler notification = Get.put(NotificationControler());
   void onInit() async {
 //  await   dataInit();
@@ -102,22 +99,6 @@ class ParkingController extends GetxController {
         parkingStatus: "available",
         slotNumber: "A-6",
       ),
-      ParkingModel(
-        id: parkingSlot8Id,
-        name: "",
-        status: "available",
-        price: "0",
-        parkingStatus: "available",
-        slotNumber: "A-7",
-      ),
-      ParkingModel(
-        id: parkingSlot8Id,
-        name: "",
-        status: "available",
-        price: "0",
-        parkingStatus: "available",
-        slotNumber: "A-8",
-      ),
     ]);
     for (var item in parkingList) {
       await db.collection("parking").doc(item.id).set(item.toJson());
@@ -176,7 +157,8 @@ class ParkingController extends GetxController {
         },
       );
       await getParkingInfo();
-      await notification.addNotification("Slot no $slotId booked" , "Booked","You have booked a new slot ");
+      await notification.addNotification(
+          "Slot no $slotId booked", "Booked", "You have booked a new slot ");
       BookedPopup(context, slotId, amount.value.toString(),
           time.value.toString(), name, vehicalNumber);
     } catch (e) {
@@ -221,7 +203,8 @@ class ParkingController extends GetxController {
         .delete();
     await personalBooking();
     await getParkingInfo();
-      await notification.addNotification("Slot no $slotId checked out" , "checkout","You have checked out from your parking ");
+    await notification.addNotification("Slot no $slotId checked out",
+        "checkout", "You have checked out from your parking ");
 
     isLoading.value = false;
   }
@@ -245,7 +228,8 @@ class ParkingController extends GetxController {
     );
     await personalBooking();
     await getParkingInfo();
-      await notification.addNotification("Slot no $slotId parked" , "parked","You have parked at your spot ");
+    await notification.addNotification(
+        "Slot no $slotId parked", "parked", "You have parked at your spot ");
 
     isLoading.value = false;
   }
@@ -271,21 +255,18 @@ class ParkingController extends GetxController {
         .delete();
     await personalBooking();
     await getParkingInfo();
-      await notification.addNotification("Slot no $slotId cancelled booking" , "cancel","You have cancelled your booking ");
-    
+    await notification.addNotification("Slot no $slotId cancelled booking",
+        "cancel", "You have cancelled your booking ");
+
     isLoading.value = false;
   }
 
-  Future<void> checkingCarisParkedOrNot() async{
-    for(var car in yourBooking)
-    {
-      if(car.parkingStatus=="parked")
-      {
+  Future<void> checkingCarisParkedOrNot() async {
+    for (var car in yourBooking) {
+      if (car.parkingStatus == "parked") {
         isYourCarParked.value = true;
         return;
-
-      }
-      else{
+      } else {
         isYourCarParked.value = false;
         return;
       }

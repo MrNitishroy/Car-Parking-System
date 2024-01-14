@@ -73,7 +73,7 @@ class HomePage extends StatelessWidget {
             SizedBox(height: 30),
             InkWell(
               onTap: () {
-                Get.to(ViewParkingAvailablities());
+                Get.to(const ViewParkingAvailablities());
               },
               child: Container(
                 padding: EdgeInsets.all(20),
