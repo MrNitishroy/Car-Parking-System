@@ -143,7 +143,7 @@ class ProfilePage extends StatelessWidget {
                                                 ),
                                                 SizedBox(height: 10),
                                                 Text(
-                                                  "Paking Time",
+                                                  "Parking Time",
                                                   style: Theme.of(context)
                                                       .textTheme
                                                       .labelSmall,

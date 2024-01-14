@@ -83,7 +83,7 @@ class BookingPage extends StatelessWidget {
                           Icons.person,
                           color: Theme.of(context).colorScheme.primary,
                         ),
-                        hintText: "ZYX Kumar",
+                        hintText: " ",
                       ),
                     ),
                   )
@@ -112,7 +112,7 @@ class BookingPage extends StatelessWidget {
                           Icons.car_rental,
                           color: Theme.of(context).colorScheme.primary,
                         ),
-                        hintText: "WB 04 ED 0987",
+                        hintText: " ",
                       ),
                     ),
                   )
