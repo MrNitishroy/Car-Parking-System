@@ -122,7 +122,7 @@ class BookingPage extends StatelessWidget {
               const Row(
                 children: [
                   Text(
-                    "Choose Slot Time (in Minuits)",
+                    "Choose Slot Time (in Minutes)",
                   )
                 ],
               ),
