@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import '../../Controller/AuthController.dart';
 import 'LoginWidget.dart';
 import 'SignUpWidget.dart';
+
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
 
@@ -28,13 +29,15 @@ class LoginPage extends StatelessWidget {
                       color: Theme.of(context).colorScheme.primaryContainer,
                       borderRadius: BorderRadius.circular(15),
                     ),
-                    child: SvgPicture.asset("Assets/Icons/logo.svg",width: 100,),
+                    child: SvgPicture.asset(
+                      "Assets/Icons/logo.svg",
+                      width: 100,
+                      color: Colors.white,
+                    ),
                   ),
                   SizedBox(height: 20),
-                   Text(
-                    "SAVE AND SECURE",
-                  style:Theme.of(context).textTheme.headlineMedium
-                  )
+                  Text("SAVE AND SECURE",
+                      style: Theme.of(context).textTheme.headlineMedium)
                 ],
               ),
               const SizedBox(height: 20),
@@ -50,13 +53,12 @@ class LoginPage extends StatelessWidget {
                     Expanded(
                         child: Column(
                       children: [
-                         Row(
+                        Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Text(
-                              "WELCOME 😍 ",
-                              style:Theme.of(context).textTheme.headlineSmall
-                            )
+                            Text("WELCOME 😍 ",
+                                style:
+                                    Theme.of(context).textTheme.headlineSmall)
                           ],
                         ),
                         SizedBox(height: 30),
@@ -160,7 +162,6 @@ class LoginPage extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 50),
-            
             ]),
           ),
         ),

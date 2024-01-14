@@ -4,20 +4,20 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:uuid/uuid.dart';
 
 import '../Components/ConfirmPop.dart';
 
 class ParkingController extends GetxController {
   final db = FirebaseFirestore.instance;
   final auth = FirebaseAuth.instance;
-  String parkingSlot1Id = "A-0";
-  String parkingSlot2Id = "A-1";
-  String parkingSlot3Id = "A-2";
-  String parkingSlot4Id = "A-3";
-  String parkingSlot5Id = "A-4";
-  String parkingSlot6Id = "A-5";
-  String parkingSlot7Id = "A-6";
+  String parkingSlot0Id = "A-0";
+  String parkingSlot1Id = "A-1";
+  String parkingSlot2Id = "A-2";
+  String parkingSlot3Id = "A-3";
+  String parkingSlot4Id = "A-4";
+  String parkingSlot5Id = "A-5";
+  String parkingSlot6Id = "A-6";
+  String parkingSlot7Id = "A-7"; 
   RxList<ParkingModel> parkingList = RxList<ParkingModel>();
   RxList<ParkingModel> yourBooking = RxList<ParkingModel>();
   RxBool isYourCarParked = false.obs;
@@ -34,7 +34,7 @@ class ParkingController extends GetxController {
   Rx<ParkingModel> parkingSlot7 = ParkingModel().obs;
   NotificationControler notification = Get.put(NotificationControler());
   void onInit() async {
-//  await   dataInit();
+    await dataInit();
     // getSlot1Info();
     // await dataInit();
     await getParkingInfo();
@@ -44,7 +44,7 @@ class ParkingController extends GetxController {
   Future<void> dataInit() async {
     parkingList = RxList<ParkingModel>([
       ParkingModel(
-        id: parkingSlot1Id,
+        id: parkingSlot0Id,
         name: "",
         status: "available",
         price: "0",
@@ -52,7 +52,7 @@ class ParkingController extends GetxController {
         slotNumber: "A-0",
       ),
       ParkingModel(
-        id: parkingSlot2Id,
+        id: parkingSlot1Id,
         name: "",
         status: "available",
         price: "0",
@@ -60,7 +60,7 @@ class ParkingController extends GetxController {
         slotNumber: "A-1",
       ),
       ParkingModel(
-        id: parkingSlot3Id,
+        id: parkingSlot2Id,
         name: "",
         status: "available",
         price: "0",
@@ -68,7 +68,7 @@ class ParkingController extends GetxController {
         slotNumber: "A-2",
       ),
       ParkingModel(
-        id: parkingSlot4Id,
+        id: parkingSlot3Id,
         name: "",
         status: "available",
         price: "0",
@@ -76,7 +76,7 @@ class ParkingController extends GetxController {
         slotNumber: "A-3",
       ),
       ParkingModel(
-        id: parkingSlot5Id,
+        id: parkingSlot4Id,
         name: "",
         status: "available",
         price: "0",
@@ -84,7 +84,7 @@ class ParkingController extends GetxController {
         slotNumber: "A-4",
       ),
       ParkingModel(
-        id: parkingSlot6Id,
+        id: parkingSlot5Id,
         name: "",
         status: "available",
         price: "0",
@@ -92,12 +92,20 @@ class ParkingController extends GetxController {
         slotNumber: "A-5",
       ),
       ParkingModel(
-        id: parkingSlot7Id,
+        id: parkingSlot6Id,
         name: "",
         status: "available",
         price: "0",
         parkingStatus: "available",
         slotNumber: "A-6",
+      ),
+      ParkingModel(
+        id: parkingSlot7Id,
+        name: "",
+        status: "available",
+        price: "0",
+        parkingStatus: "available",
+        slotNumber: "A-7",
       ),
     ]);
     for (var item in parkingList) {

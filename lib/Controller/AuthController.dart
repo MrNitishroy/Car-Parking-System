@@ -1,6 +1,7 @@
 import 'package:car_parking_system/Pages/Auth/LoginPage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
@@ -20,25 +21,36 @@ class AuthController extends GetxController {
 
   Future<void> loginWithEmailPassword() async {
     isLoading.value = true;
-    await auth.signInWithEmailAndPassword(
-        email: loginEmail.text, password: loginPwd.text);
-    Get.offAll(
-      HomePage(),
-      transition: Transition.fadeIn,
-    );
+    try {
+      await auth.signInWithEmailAndPassword(
+          email: loginEmail.text, password: loginPwd.text);
+      Get.offAll(
+        HomePage(),
+        transition: Transition.fadeIn,
+      );
+    } catch (e) {
+      Fluttertoast.showToast(
+          backgroundColor: Colors.red, msg: "Email or Password is wrong");
+      // print(e);
+    }
     isLoading.value = false;
   }
 
   Future<void> signUpWithEmailPassword() async {
     isLoading.value = true;
-    await auth.createUserWithEmailAndPassword(
-      email: signupEmail.text,
-      password: signupPwd.text,
-    );
-    Get.offAll(
-      HomePage(),
-      transition: Transition.fadeIn,
-    );
+    try {
+      await auth.createUserWithEmailAndPassword(
+        email: signupEmail.text,
+        password: signupPwd.text,
+      );
+      Get.offAll(
+        HomePage(),
+        transition: Transition.fadeIn,
+      );
+    } catch (e) {
+      Fluttertoast.showToast(
+          backgroundColor: Colors.red, msg: "Email or Password is wrong");
+    }
     isLoading.value = false;
   }
 
