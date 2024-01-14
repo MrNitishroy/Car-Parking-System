@@ -163,6 +163,7 @@ class ParkingController extends GetxController {
           time.value.toString(), name, vehicalNumber);
     } catch (e) {
       print(e);
+      isLoading.value = false;
     }
   }
 
