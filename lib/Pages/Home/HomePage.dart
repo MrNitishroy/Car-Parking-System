@@ -89,7 +89,7 @@ class HomePage extends StatelessWidget {
                     ),
                     SizedBox(width: 30),
                     Text(
-                      "View Parking Slot",
+                      "View Parking Spots",
                       style: Theme.of(context).textTheme.headlineMedium,
                     ),
                   ],
