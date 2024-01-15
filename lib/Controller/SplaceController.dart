@@ -4,17 +4,23 @@ import 'package:car_parking_system/Pages/Home/HomePage.dart';
 import 'package:get/get.dart';
 
 class SplaceController extends GetxController {
+  @override
   void onInit() {
     super.onInit();
     splaceHandle();
   }
-  AuthController  authController = Get.put(AuthController());
+
+  AuthController authController = Get.put(AuthController());
   Future<void> splaceHandle() async {
-    await Future.delayed(Duration(seconds: 10));
-    if(authController.auth.currentUser != null){
-      Get.offAll(HomePage());
-    }else{
-      Get.offAll(LoginPage());
+    await Future.delayed(const Duration(seconds: 10));
+    if (authController.auth.currentUser != null) {
+      Get.offAll(
+        const HomePage(),
+      );
+    } else {
+      Get.offAll(
+        const LoginPage(),
+      );
     }
   }
 }

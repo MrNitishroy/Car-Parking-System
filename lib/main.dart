@@ -6,8 +6,8 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'Config/myTheme.dart';
 
-void main() async{
-WidgetsFlutterBinding.ensureInitialized();
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(const MyApp());
 }
@@ -23,8 +23,8 @@ class MyApp extends StatelessWidget {
       theme: lightTheme,
       debugShowCheckedModeBanner: false,
       darkTheme: darkTheme,
-      themeMode: ThemeMode.dark,
-      home: Splace_Screen(),
+      themeMode: ThemeMode.light,
+      home: const Splace_Screen(),
     );
   }
 }

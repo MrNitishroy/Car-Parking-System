@@ -2,12 +2,14 @@ import 'package:car_parking_system/Controller/AuthController.dart';
 import 'package:car_parking_system/Controller/ParkingController.dart';
 import 'package:car_parking_system/Controller/ThemeController.dart';
 import 'package:car_parking_system/Pages/CCTVPage/CctvPage.dart';
+import 'package:car_parking_system/Pages/GoogleMap/GoogleMap.dart';
 import 'package:car_parking_system/Pages/Notification/NotificationPage.dart';
 import 'package:car_parking_system/Pages/PakingSlotPage/ViewParkingAvailablities.dart';
 import 'package:car_parking_system/Pages/ProfilePage/ProfilePage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:lottie/lottie.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -50,16 +52,21 @@ class HomePage extends StatelessWidget {
         child: ListView(
           children: [
             SizedBox(height: 20),
-            SvgPicture.asset(
-              "Assets/Icons/logo.svg",
-              color: Theme.of(context).colorScheme.onBackground,
+            // SvgPicture.asset(
+            //   "Assets/Icons/logo.svg",
+            //   color: Theme.of(context).colorScheme.onBackground,
+            // ),
+            Lottie.asset(
+              'Assets/animation/running_car.json',
+              width: 100,
+              height: 100,
             ),
             SizedBox(height: 20),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  "SAVE AND SECURE",
+                  "PARK EASY",
                   style: Theme.of(context).textTheme.headlineLarge,
                 ),
               ],
@@ -74,6 +81,7 @@ class HomePage extends StatelessWidget {
             InkWell(
               onTap: () {
                 Get.to(const ViewParkingAvailablities());
+                // Get.to(GoogleMapPage());
               },
               child: Container(
                 padding: EdgeInsets.all(20),
@@ -115,7 +123,7 @@ class HomePage extends StatelessWidget {
                 ),
                 child: Row(
                   children: [
-                    Icon(
+                    const Icon(
                       Icons.videocam_rounded,
                       size: 40,
                     ),
@@ -142,7 +150,7 @@ class HomePage extends StatelessWidget {
                 ),
                 child: Row(
                   children: [
-                    Icon(
+                    const Icon(
                       Icons.person,
                       size: 40,
                     ),

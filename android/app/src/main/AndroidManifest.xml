@@ -4,6 +4,8 @@
         android:label="car_parking_system"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
+         <meta-data android:name="com.google.android.geo.API_KEY"
+               android:value="AIzaSyAl5TtsfNcQL0iLuG_STqqYcW5zgEV19no"/>
         <activity
             android:name=".MainActivity"
             android:exported="true"

@@ -21,23 +21,27 @@ class LoginPage extends StatelessWidget {
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Container(
-                    padding: const EdgeInsets.all(8),
-                    width: 100,
-                    height: 100,
-                    decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.primaryContainer,
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                    child: SvgPicture.asset(
-                      "Assets/Icons/logo.svg",
-                      width: 100,
-                      color: Colors.white,
-                    ),
+                  Image.asset(
+                    "Assets/Photos/appLogo.jpg",
+                    width: 200,
                   ),
-                  SizedBox(height: 20),
-                  Text("SAVE AND SECURE",
-                      style: Theme.of(context).textTheme.headlineMedium)
+                  // Container(
+                  //   padding: const EdgeInsets.all(8),
+                  //   width: 100,
+                  //   height: 100,
+                  //   decoration: BoxDecoration(
+                  //     color: Theme.of(context).colorScheme.primaryContainer,
+                  //     borderRadius: BorderRadius.circular(15),
+                  //   ),
+                  //   child: SvgPicture.asset(
+                  //     "Assets/Icons/logo.svg",
+                  //     width: 100,
+                  //     color: Colors.white,
+                  //   ),
+                  // ),
+                  // SizedBox(height: 20),
+                  // Text("SAVE AND SECURE",
+                  //     style: Theme.of(context).textTheme.headlineMedium)
                 ],
               ),
               const SizedBox(height: 20),
